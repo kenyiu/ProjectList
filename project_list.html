@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Code4HK Project List</title>
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <h1>Code 4 Hong Kong Project List</h1>
+    <a href="http://goo.gl/TajHiZ">Add your own project</a>
+    <table class="table">
+        <thead>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Github Link</th>
+            <th>Proposer</th>
+            <th>Contributors</th>
+            <th>Create Date</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0Alfwf3zku9wYdF82V3JYT2U0WlFMQ1JSS0tXTkRxaHc/od6/public/values?alt=json", function(data) {
+        //first row "title" column
+        var html;
+        for (var i = 0; i < data.feed.entry.length; i++) {
+            html = html + "<tr>";
+            html = html + "<td>" + data.feed.entry[i]['gsx$projectname']['$t'] + "</td>";
+            html = html + "<td>" + data.feed.entry[i]['gsx$description']['$t'] + "</td>";
+            html = html + "<td><a href='" + data.feed.entry[i]['gsx$githublink']['$t'] + "'>" + data.feed.entry[i]['gsx$githublink']['$t'] + "</a></td>";
+            html = html + "<td>" + data.feed.entry[i]['gsx$proposer']['$t'] + "</td > ";
+            html = html + " <td>" + data.feed.entry[i]['gsx$contributors']['$t'] + " </td>";
+            html = html + "<td>" + data.feed.entry[i]['gsx$createdate']['$t'] + "</td > ";
+            html = html + " </tr>";
+        }
+        $("tbody").html(html);
+    });
+    </script>
+</body>
+
+</html>
